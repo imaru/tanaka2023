@@ -1,0 +1,30 @@
+library(ggplot2)
+library(gridExtra)
+
+dat<-read.csv('factorres.csv')
+dat$model<-as.factor(dat$model)
+dat$scene<-as.factor(dat$scene)
+g1<-ggplot(data=dat, aes(x=model, y=MR1, color=model,size=log(history), shape=scene))+geom_point()
+g1<-g1+ylab('基礎動作')+scale_shape_discrete(labels=c('春','夏','秋','冬'))+xlab('モデル')+theme(text=element_text(size=12))
+g1<-g1+guides(color='none')
+#g1<-g1+theme(legend.position = 'none')
+#plot(g1)
+
+g2<-ggplot(data=dat, aes(x=model, y=MR2, color=model,size=log(history), shape=scene))+geom_point()
+g2<-g2+ylab('応用動作')+scale_shape_discrete(labels=c('春','夏','秋','冬'))+xlab('モデル')+theme(text=element_text(size=12))
+g2<-g2+guides(color='none')
+#g2<-g2+theme(legend.position = 'none')
+#plot(g2)
+
+g3<-ggplot(data=dat, aes(x=model, y=MR3, color=model,size=log(history), shape=scene))+geom_point()
+g3<-g3+ylab('演目解釈')+scale_shape_discrete(labels=c('春','夏','秋','冬'))+xlab('モデル')+theme(text=element_text(size=12))
+g3<-g3+guides(color='none')
+#g3<-g3+theme(legend.position = 'none')
+#plot(g3)
+
+g4<-ggplot(data=dat, aes(x=model, y=score, color=model,size=log(history), shape=scene))+geom_point()
+g4<-g4+ylab('総合評価')+scale_shape_discrete(labels=c('春','夏','秋','冬'))+xlab('モデル')+theme(text=element_text(size=12))
+g4<-g4+guides(color='none')
+#plot(g4)
+
+grid.arrange(g1,g2,g3,g4)
